@@ -1,0 +1,142 @@
+---
+import { withBase } from '../lib/paths';
+---
+
+<div class="splash" id="site-splash" role="presentation">
+	<div class="splash__grid" aria-hidden="true"></div>
+	<img
+		class="splash__logo"
+		src={withBase('/images/icon_burokyo.png')}
+		alt="ブロッコリー教会"
+		width="720"
+		height="405"
+		decoding="async"
+		fetchpriority="high"
+	/>
+</div>
+
+<style is:global>
+	.splash {
+		position: fixed;
+		inset: 0;
+		z-index: 10000;
+		display: grid;
+		place-items: center;
+		background: #04150c;
+		opacity: 1;
+		filter: blur(0);
+		transform: scale(1);
+		transform-origin: center center;
+		will-change: opacity, filter, transform;
+		transition:
+			filter 1s cubic-bezier(0.22, 1, 0.36, 1),
+			transform 1s cubic-bezier(0.22, 1, 0.36, 1),
+			opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.2s,
+			visibility 0.85s 0.2s;
+	}
+
+	.splash__grid {
+		position: absolute;
+		inset: 0;
+		opacity: 0.55;
+		pointer-events: none;
+		background-image: url("data:image/svg+xml,%3Csvg width='64' height='64' viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M64 0H0v64' fill='none' stroke='%23038932' stroke-opacity='0.35' stroke-width='1'/%3E%3C/svg%3E");
+	}
+
+	.splash__logo {
+		position: relative;
+		z-index: 1;
+		width: min(72vw, 28rem);
+		height: auto;
+		opacity: 0;
+		transform: scale(0.92);
+		mix-blend-mode: screen;
+	}
+
+	.splash.is-animate .splash__logo {
+		animation: splash-logo-in 1s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
+	}
+
+	.splash.is-leaving {
+		filter: blur(28px);
+		opacity: 0;
+		transform: scale(1.06);
+		visibility: hidden;
+		pointer-events: none;
+	}
+
+	.splash.is-skip,
+	.splash.is-done {
+		display: none !important;
+	}
+
+	body.is-splash-locked {
+		overflow: hidden;
+	}
+
+	@keyframes splash-logo-in {
+		to {
+			opacity: 0.85;
+			transform: scale(1);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.splash.is-animate .splash__logo {
+			opacity: 0.85;
+			transform: none;
+			animation: none;
+		}
+
+		.splash.is-leaving {
+			filter: none;
+			transform: none;
+		}
+
+		.splash {
+			transition-duration: 0.01ms;
+			transition-delay: 0s;
+		}
+	}
+</style>
+
+<script is:inline>
+	(function () {
+		var splash = document.getElementById('site-splash');
+		if (!splash) return;
+
+		function isSameOriginReferrer() {
+			if (!document.referrer) return false;
+			try {
+				return new URL(document.referrer).origin === location.origin;
+			} catch (e) {
+				return false;
+			}
+		}
+
+		var nav = performance.getEntriesByType('navigation')[0];
+		var navType = nav ? nav.type : 'navigate';
+		// 更新時 / サイト外からのアクセス時のみ表示。同一サイト内の移動ではスキップ
+		var shouldShow = navType === 'reload' || (navType === 'navigate' && !isSameOriginReferrer());
+
+		if (!shouldShow) {
+			splash.classList.add('is-skip');
+			return;
+		}
+
+		document.body.classList.add('is-splash-locked');
+		splash.classList.add('is-animate');
+
+		var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		var holdMs = reduceMotion ? 300 : 2800;
+		var fadeMs = reduceMotion ? 50 : 1200;
+
+		window.setTimeout(function () {
+			splash.classList.add('is-leaving');
+			window.setTimeout(function () {
+				splash.classList.add('is-done');
+				document.body.classList.remove('is-splash-locked');
+			}, fadeMs);
+		}, holdMs);
+	})();
+</script>

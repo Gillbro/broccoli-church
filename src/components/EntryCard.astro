@@ -1,0 +1,137 @@
+---
+import { withBase } from '../lib/paths';
+
+interface Props {
+	href: string;
+	title: string;
+	excerpt: string;
+	image: string;
+	imageAlt: string;
+	meta?: string;
+	datetime?: string;
+}
+
+const { href, title, excerpt, image, imageAlt, meta, datetime } = Astro.props;
+---
+
+<li class="entry-card">
+	<a class="entry-card__link" href={withBase(href)}>
+		<div class="entry-card__media">
+			<img src={withBase(image)} alt={imageAlt} width="640" height="400" loading="lazy" decoding="async" />
+		</div>
+		<div class="entry-card__body">
+			{
+				meta && (
+					<p class="entry-card__meta">
+						{datetime ? <time datetime={datetime}>{meta}</time> : meta}
+					</p>
+				)
+			}
+			<h2 class="entry-card__title">{title}</h2>
+			<p class="entry-card__excerpt">{excerpt}</p>
+			<span class="entry-card__more">詳しく見る</span>
+		</div>
+	</a>
+</li>
+
+<style>
+	.entry-card {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.entry-card__link {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		overflow: hidden;
+		text-decoration: none;
+		color: inherit;
+		background: var(--color-panel);
+		border: 1px solid var(--color-line);
+		border-radius: var(--radius);
+		box-shadow: var(--shadow-soft);
+		transition:
+			transform 0.25s var(--ease-out),
+			border-color 0.25s var(--ease-out),
+			box-shadow 0.25s var(--ease-out);
+	}
+
+	.entry-card__link:hover {
+		transform: translateY(-3px);
+		border-color: rgba(3, 137, 50, 0.4);
+		box-shadow: 0 22px 44px rgba(4, 21, 12, 0.12);
+	}
+
+	.entry-card__media {
+		aspect-ratio: 16 / 10;
+		overflow: hidden;
+		background: var(--color-void);
+	}
+
+	.entry-card__media img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.35s var(--ease-out);
+	}
+
+	.entry-card__link:hover .entry-card__media img {
+		transform: scale(1.04);
+	}
+
+	.entry-card__body {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+		gap: 0.55rem;
+		padding: 1.25rem 1.2rem 1.35rem;
+	}
+
+	.entry-card__meta {
+		margin: 0;
+		font-size: 0.82rem;
+		letter-spacing: 0.04em;
+		color: var(--color-accent);
+	}
+
+	.entry-card__title {
+		margin: 0;
+		font-size: 1.15rem;
+		font-weight: 700;
+		line-height: 1.45;
+		color: var(--color-forest);
+	}
+
+	.entry-card__excerpt {
+		margin: 0;
+		flex: 1;
+		font-size: 0.95rem;
+		line-height: 1.7;
+		color: var(--color-text-muted);
+	}
+
+	.entry-card__more {
+		margin-top: 0.35rem;
+		font-size: 0.85rem;
+		font-weight: 500;
+		letter-spacing: 0.04em;
+		color: var(--color-accent-deep);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.entry-card__link,
+		.entry-card__media img {
+			transition: none;
+		}
+
+		.entry-card__link:hover {
+			transform: none;
+		}
+
+		.entry-card__link:hover .entry-card__media img {
+			transform: none;
+		}
+	}
+</style>

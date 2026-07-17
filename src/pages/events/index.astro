@@ -1,0 +1,69 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import EntryCard from '../../components/EntryCard.astro';
+import { withBase } from '../../lib/paths';
+import { eventItems } from '../../data/events';
+---
+
+<Layout title="イベント" description="ブロッコリー教会の開催イベントについて">
+	<header class="page-hero">
+		<div class="container">
+			<p class="section__eyebrow">Events</p>
+			<h1>イベント</h1>
+			<p>開催中のイベント及び企画一覧です。</p>
+		</div>
+	</header>
+
+	<section class="section">
+		<div class="container">
+			<ul class="entry-grid">
+				{
+					eventItems.map((event) => (
+						<EntryCard
+							href={`/events/${event.slug}/`}
+							title={event.title}
+							excerpt={event.body}
+							image={event.image}
+							imageAlt={event.imageAlt}
+							meta={`${event.label} ／ ${event.time}`}
+							datetime={event.date}
+						/>
+					))
+				}
+			</ul>
+			<p class="event-note">
+				※日程は変更になることがあります。最新情報は<a href={withBase('/news')}>お知らせ</a>もあわせてご確認ください。
+			</p>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.entry-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.5rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.event-note {
+		margin: 2rem 0 0;
+		font-size: 0.9rem;
+		color: var(--color-text-muted);
+		text-align: center;
+	}
+
+	@media (max-width: 900px) {
+		.entry-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (max-width: 560px) {
+		.entry-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

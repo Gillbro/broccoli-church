@@ -1,0 +1,87 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { withBase } from '../lib/paths';
+---
+
+<Layout title="404" description="ページが見つかりませんでした。">
+	<section class="not-found" aria-labelledby="not-found-title">
+		<div class="not-found__grid" aria-hidden="true"></div>
+		<div class="not-found__inner container">
+			<p class="not-found__code" id="not-found-title">404</p>
+			<div class="not-found__art">
+				<img
+					src={withBase('/images/buro404.png')}
+					alt=""
+					width="400"
+					height="400"
+					decoding="async"
+				/>
+			</div>
+			<p class="not-found__lead">ページが見つかりませんでした。</p>
+			<p class="not-found__actions">
+				<a class="btn btn--primary" href={withBase('/')}>トップへ戻る</a>
+			</p>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.not-found {
+		position: relative;
+		min-height: calc(100svh - var(--nav-height));
+		display: grid;
+		place-items: center;
+		padding: calc(var(--nav-height) + 3rem) 1.25rem 4rem;
+		overflow: hidden;
+		background: var(--color-void);
+		color: var(--color-text-on-dark);
+	}
+
+	.not-found__grid {
+		position: absolute;
+		inset: 0;
+		opacity: 0.55;
+		pointer-events: none;
+		background-image: url("data:image/svg+xml,%3Csvg width='64' height='64' viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M64 0H0v64' fill='none' stroke='%23038932' stroke-opacity='0.35' stroke-width='1'/%3E%3C/svg%3E");
+	}
+
+	.not-found__inner {
+		position: relative;
+		z-index: 1;
+		display: grid;
+		justify-items: center;
+		gap: 1.25rem;
+		text-align: center;
+	}
+
+	.not-found__code {
+		margin: 0;
+		font-family: var(--font-mono);
+		font-size: clamp(4.5rem, 18vw, 8rem);
+		font-weight: 500;
+		letter-spacing: 0.12em;
+		line-height: 1;
+		color: var(--color-leaf);
+	}
+
+	.not-found__art {
+		width: min(100%, 18rem);
+	}
+
+	.not-found__art img {
+		display: block;
+		width: 100%;
+		height: auto;
+		filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.35));
+	}
+
+	.not-found__lead {
+		margin: 0;
+		font-size: 1.05rem;
+		color: rgba(243, 248, 244, 0.72);
+	}
+
+	.not-found__actions {
+		margin: 0.5rem 0 0;
+	}
+</style>

@@ -1,0 +1,390 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { withBase } from '../lib/paths';
+
+const pillars = [
+	{
+		num: '01',
+		title: '集う',
+		body: 'VR空間での交流イベントを通じて、ブロッコリーを愛する仲間とつながります。',
+	},
+	{
+		num: '02',
+		title: '創る',
+		body: 'ブロッコリーをモチーフにしたワールド・アバター・作品を制作し、その魅力を形にします。',
+	},
+	{
+		num: '03',
+		title: '伝える',
+		body: '食と文化をめぐる情報発信を行い、ブロッコリーの理解を広げていきます。',
+	},
+];
+---
+
+<Layout
+	title="教会について"
+	description="ブロッコリー教会の成り立ちと、VRChatでの活動について。"
+>
+	<header class="page-hero">
+		<div class="container">
+			<p class="section__eyebrow">About</p>
+			<h1>教会について</h1>
+			<p>ブロッコリーを愛し、ブロッコリーに愛される。</p>
+		</div>
+	</header>
+
+	<section class="section about">
+		<div class="container">
+			<div class="about__head">
+				<p class="section__eyebrow">Who We Are</p>
+				<h2 class="about__title">ブロッコリー教会とは</h2>
+				<p class="section__lead">
+					VRChat上でブロッコリーの魅力を広める共同体。現実と仮想のあいだで、ブロッコリーの理解を深めることが私たちの祈りです。
+				</p>
+			</div>
+
+			<article class="about-card">
+				<span class="about-card__grid" aria-hidden="true"></span>
+				<span class="about-card__corner about-card__corner--tl" aria-hidden="true"></span>
+				<span class="about-card__corner about-card__corner--br" aria-hidden="true"></span>
+
+				<div class="about-card__inner">
+					<p class="about-card__label">Overview</p>
+					<h3 class="about-card__heading">わたしたちについて</h3>
+					<div class="about-card__body">
+						<p>
+							ブロッコリー教会は、VRChat上でブロッコリーの魅力を広めるべく、ブロッコリーを生かした活動を展開する団体です。
+							食卓の定番野菜を、万物の象徴として掲げています。
+						</p>
+						<p>
+							ブロッコリーを研究し、レシピを分かち合い、芸術に昇華する。現実と仮想のあいだで、ブロッコリーの理解を深めることが私たちの祈りです。
+						</p>
+					</div>
+
+					<blockquote class="about-creed">
+						<p>ブロッコリーは世界一おいしい</p>
+						<cite>Broccoli is the most delicious in the world.</cite>
+					</blockquote>
+				</div>
+			</article>
+
+			<div class="about-pillars">
+				<div class="about-pillars__head">
+					<p class="section__eyebrow">Activity</p>
+					<h3 class="about-pillars__title">活動の柱</h3>
+				</div>
+
+				<div class="about-pillars__grid">
+					{
+						pillars.map((pillar) => (
+							<article class="about-pillar">
+								<span class="about-pillar__index" aria-hidden="true">
+									{pillar.num}
+								</span>
+								<h4>{pillar.title}</h4>
+								<p>{pillar.body}</p>
+							</article>
+						))
+					}
+				</div>
+			</div>
+
+			<article class="about-card about-card--founder">
+				<span class="about-card__grid" aria-hidden="true"></span>
+				<span class="about-card__corner about-card__corner--tl" aria-hidden="true"></span>
+				<span class="about-card__corner about-card__corner--br" aria-hidden="true"></span>
+
+				<div class="about-card__inner">
+					<p class="about-card__label">Founder</p>
+					<h3 class="about-card__heading">教祖について</h3>
+					<div class="about-card__body">
+						<p>
+							ブロッコリー教会は教祖であるGillbro（ギルブロ）によって運営されています。この空間は全てGillbroによって制作・運営されています。
+							一人で勝手に初めて勝手に盛り上げているだけなので、「ブロッコリーオタクが何か言っている」くらいの感覚でついてきていただけると幸いです。
+						</p>
+						<p>
+							このサイトにたどり着いたあなたは、どのような経緯であれブロッコリーに興味を持っているのだと思います。そんなあなたの思考の一部にブロッコリーを植えつけることが一つの目標です。
+						</p>
+						<p>
+							というか、もう植えつけられてるんじゃないかな？カラーバス効果というものがありまして、特定の物事に意識を向けると、それに関連する情報が自然と目や耳に飛び込んで来るようになるんですね。
+							ということで、明日のあなたの夕食はブロッコリーです。ブロッコリーですよ！
+						</p>
+					</div>
+				</div>
+			</article>
+
+			<nav class="about-links" aria-label="関連ページ">
+				<a class="about-links__item" href={withBase('/doctrine')}>
+					<span class="about-links__label">教義</span>
+					<span class="about-links__desc">ブロッコリー教会の思想を読む</span>
+					<span class="about-links__arrow" aria-hidden="true">→</span>
+				</a>
+				<a class="about-links__item" href={withBase('/events')}>
+					<span class="about-links__label">イベント</span>
+					<span class="about-links__desc">開催予定と活動の様子</span>
+					<span class="about-links__arrow" aria-hidden="true">→</span>
+				</a>
+			</nav>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.about {
+		background: var(--color-mist);
+	}
+
+	.about__head {
+		text-align: center;
+		max-width: 40rem;
+		margin-inline: auto;
+		margin-bottom: 2.75rem;
+	}
+
+	.about__title {
+		margin: 0 0 1rem;
+		font-size: clamp(1.65rem, 3vw, 2rem);
+		color: var(--color-forest);
+	}
+
+	.about__head .section__lead {
+		margin: 0;
+	}
+
+	.about-card {
+		position: relative;
+		margin-bottom: 2.5rem;
+		border: 1px solid var(--color-line);
+		border-radius: var(--radius);
+		background: var(--color-panel);
+		box-shadow: var(--shadow-soft);
+		overflow: hidden;
+	}
+
+	.about-card__grid {
+		position: absolute;
+		inset: 0;
+		background-image:
+			url("data:image/svg+xml,%3Csvg width='56' height='56' viewBox='0 0 56 56' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M28 0v56M0 28h56' stroke='%23038932' stroke-opacity='0.06' stroke-width='1'/%3E%3C/svg%3E");
+		pointer-events: none;
+	}
+
+	.about-card__corner {
+		position: absolute;
+		width: 1.1rem;
+		height: 1.1rem;
+		border-color: var(--color-accent);
+		border-style: solid;
+		opacity: 0.55;
+		pointer-events: none;
+		z-index: 1;
+	}
+
+	.about-card__corner--tl {
+		top: 1rem;
+		left: 1rem;
+		border-width: 2px 0 0 2px;
+	}
+
+	.about-card__corner--br {
+		right: 1rem;
+		bottom: 1rem;
+		border-width: 0 2px 2px 0;
+	}
+
+	.about-card__inner {
+		position: relative;
+		z-index: 1;
+		padding: clamp(1.75rem, 3vw, 2.5rem);
+	}
+
+	.about-card__label {
+		margin: 0 0 0.65rem;
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		font-weight: 500;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+		color: var(--color-accent);
+	}
+
+	.about-card__heading {
+		margin: 0 0 1.25rem;
+		font-size: 1.35rem;
+		color: var(--color-forest);
+	}
+
+	.about-card__body {
+		display: grid;
+		gap: 1rem;
+		max-width: 52rem;
+	}
+
+	.about-card__body p {
+		margin: 0;
+		color: var(--color-text-muted);
+		line-height: 1.95;
+	}
+
+	.about-card__highlight {
+		padding: 1.15rem 1.25rem;
+		border-radius: var(--radius-sm);
+		border: 1px solid rgba(3, 137, 50, 0.22);
+		border-left: 3px solid var(--color-accent);
+		background: var(--color-soft);
+		color: var(--color-forest) !important;
+	}
+
+	.about-creed {
+		margin: 2rem 0 0;
+		padding: 1.5rem 0 0;
+		border: none;
+		border-top: 1px solid var(--color-line);
+		background: transparent;
+	}
+
+	.about-creed p {
+		margin: 0 0 0.65rem;
+		font-family: var(--font-display);
+		font-size: clamp(1.2rem, 2.5vw, 1.55rem);
+		font-weight: 700;
+		letter-spacing: 0.03em;
+		color: var(--color-forest);
+	}
+
+	.about-creed cite {
+		display: block;
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		font-style: normal;
+		letter-spacing: 0.08em;
+		color: var(--color-text-muted);
+	}
+
+	.about-pillars {
+		margin-bottom: 2.5rem;
+	}
+
+	.about-pillars__head {
+		margin-bottom: 1.5rem;
+	}
+
+	.about-pillars__title {
+		margin: 0;
+		font-size: 1.35rem;
+		color: var(--color-forest);
+	}
+
+	.about-pillars__grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.25rem;
+	}
+
+	.about-pillar {
+		position: relative;
+		padding: 1.5rem 1.35rem 1.35rem;
+		border: 1px solid var(--color-line);
+		border-radius: var(--radius);
+		background: var(--color-panel);
+		box-shadow: var(--shadow-soft);
+	}
+
+	.about-pillar__index {
+		display: block;
+		margin-bottom: 0.85rem;
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
+		letter-spacing: 0.14em;
+		color: var(--color-accent);
+	}
+
+	.about-pillar h4 {
+		margin: 0 0 0.65rem;
+		font-size: 1.15rem;
+		color: var(--color-forest);
+	}
+
+	.about-pillar p {
+		margin: 0;
+		font-size: 0.95rem;
+		line-height: 1.85;
+		color: var(--color-text-muted);
+	}
+
+	.about-card--founder {
+		margin-bottom: 2rem;
+	}
+
+	.about-links {
+		display: grid;
+		gap: 0;
+		border: 1px solid var(--color-line);
+		border-radius: var(--radius);
+		background: var(--color-panel);
+		overflow: hidden;
+	}
+
+	.about-links__item {
+		display: grid;
+		grid-template-columns: minmax(7rem, 10rem) 1fr auto;
+		gap: 1rem 2rem;
+		align-items: center;
+		padding: 1.35rem 1.5rem;
+		text-decoration: none;
+		color: inherit;
+		border-bottom: 1px solid var(--color-line);
+		transition:
+			background 0.25s var(--ease-out),
+			padding-left 0.25s var(--ease-out);
+	}
+
+	.about-links__item:last-child {
+		border-bottom: none;
+	}
+
+	.about-links__item:hover {
+		padding-left: 1.85rem;
+		background: rgba(3, 137, 50, 0.04);
+	}
+
+	.about-links__label {
+		font-family: var(--font-display);
+		font-size: 1.1rem;
+		font-weight: 700;
+		color: var(--color-forest);
+		letter-spacing: 0.03em;
+	}
+
+	.about-links__desc {
+		color: var(--color-text-muted);
+		font-size: 0.95rem;
+	}
+
+	.about-links__arrow {
+		font-family: var(--font-mono);
+		color: var(--color-accent);
+		transition: transform 0.25s var(--ease-out);
+	}
+
+	.about-links__item:hover .about-links__arrow {
+		transform: translateX(4px);
+	}
+
+	@media (max-width: 900px) {
+		.about-pillars__grid {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.about-links__item {
+			grid-template-columns: 1fr auto;
+			gap: 0.35rem 1rem;
+		}
+
+		.about-links__desc {
+			grid-column: 1 / -1;
+		}
+	}
+</style>

@@ -1,0 +1,494 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const tenets = [
+	{
+		num: 'I',
+		label: '第一の教義',
+		title: '象徴',
+		quote: 'ブロッコリーはその完全性を象徴する。その姿は樹木のように天を指す。',
+		content: [
+			'ブロッコリーは、自らを誇示することなく、静かにそこに在ります。',
+			'その姿は大地より芽吹きながら、なお天へと向かう樹木にも似ています。無数の小房が集まり、一つの形を成す様は、完全なる均衡の顕現です。',
+			'我々はブロッコリーを通して、世界に存在する調和と成長の姿を見るのです。',
+		],
+	},
+	{
+		num: 'II',
+		label: '第二の教義',
+		title: '調和',
+		quote: 'ブロッコリーの小房は無数にして一を成す。食卓においては全ての食材を尊ぶ。',
+		content: [
+			'ブロッコリーは世界一おいしい。しかし、それは他の食材を否定する言葉ではありません。',
+			'スープには玉ねぎの役割があり、サラダにはトマトの彩りがあります。カリフラワーもまた、同じアブラナ科の隣人として尊ばれるべき存在です。',
+			'小さな房が集まり一つの姿を成すように、食卓もまた、多様な食材によって成り立っています。',
+			'調和なくして、世界一のおいしさは成立しません。',
+		],
+	},
+	{
+		num: 'III',
+		label: '第三の教義',
+		title: '啓示',
+		quote: '人はブロッコリーを味わうことで、その深みを知る。初めは苦みとして現れ、やがて真なる美味へと至る。',
+		content: [
+			'ブロッコリーの魅力は、一度に理解されるものではありません。',
+			'幼き日に感じた苦味は、時を経て深みへと変わります。人は人生の中で幾度となくブロッコリーと出会い、そのたびに新たな発見を得ます。',
+			'我々はこれを「味覚の啓示」と呼びます。',
+			'真なる美味しさとは、舌だけでなく、経験によって理解されるものなのです。',
+		],
+	},
+	{
+		num: 'IV',
+		label: '第四の教義',
+		title: '普遍',
+		quote: 'ブロッコリーは常にそこに在る。食材を超越し、概念として揺るがぬ価値を持つ。',
+		content: [
+			'時代は移ろい、人の価値観は変化します。',
+			'しかし、ブロッコリーは変わりません。',
+			'古代より食され、現代においてなお愛され続けるその姿は、人の評価によって価値が決まるものではないことを示しています。',
+			'ブロッコリーは、食卓の上に存在するだけではありません。',
+			'それは「世界一おいしい」という理念そのものとして、人々の記憶と文化の中に在り続けるのです。',
+		],
+	},
+	{
+		num: 'V',
+		label: '第五の教義',
+		title: '伝承',
+		quote: 'ブロッコリーの魅力は人のみぞ知る。あらゆる形を持って、その記憶をつなぐ。',
+		content: [
+			'ブロッコリーは語られることで受け継がれます。',
+			'一皿の料理として、物語として、歌として、絵として、そして人々の記憶として。',
+			'その魅力は決して一人では完結しません。',
+			'誰かがブロッコリーを語り、誰かがそれを聞き、また別の誰かへと伝えていく。その繰り返しこそがブロッコリー教会の営みです。',
+			'我々はブロッコリーを崇めるために存在するのではありません。',
+			'ブロッコリーの魅力を知り、その記憶を未来へと伝えるために存在するのです。',
+		],
+	},
+];
+---
+
+<Layout title="教義" description="ブロッコリー教会が掲げる教義と、その解説について。">
+	<header class="page-hero">
+		<div class="container">
+			<p class="section__eyebrow">Doctrine</p>
+			<h1>教義</h1>
+			<p>わたしたちが信じる、ブロッコリーの教えとその解説です。</p>
+		</div>
+	</header>
+
+	<section class="section doctrine-tenets">
+		<div class="container">
+			<div class="doctrine-tenets__head">
+				<p class="section__eyebrow">Five Tenets</p>
+				<h2 class="doctrine-tenets__title">五つの教義</h2>
+				<p class="section__lead">
+					教義はブロッコリーを愛する心の道しるべです。
+				</p>
+			</div>
+
+			<article class="tenet-card doctrine-creed-card">
+				<span class="tenet-card__grid-bg" aria-hidden="true"></span>
+				<span class="tenet-card__corner tenet-card__corner--tl" aria-hidden="true"></span>
+				<span class="tenet-card__corner tenet-card__corner--br" aria-hidden="true"></span>
+				<div class="doctrine-creed-card__inner">
+					<p class="doctrine-creed-card__label">信条</p>
+					<p class="doctrine-creed-card__lead">
+						ブロッコリー教会は、ブロッコリーの魅力を広めるべく結成されました。我々の信条は、ただ一つ。
+					</p>
+					<blockquote class="doctrine-creed-card__quote">
+						<p>ブロッコリーは世界一おいしい。</p>
+					</blockquote>
+					<p class="doctrine-creed-card__note">Broccoli is the most delicious in the world.</p>
+				</div>
+			</article>
+
+			<nav class="doctrine-index" aria-label="教義一覧">
+				{
+					tenets.map((t) => (
+						<a class="doctrine-index__item" href={`#tenet-${t.num}`}>
+							<span class="doctrine-index__num">{t.num}</span>
+							<span class="doctrine-index__title">{t.title}</span>
+						</a>
+					))
+				}
+			</nav>
+
+			<ol class="tenets">
+				{
+					tenets.map((t) => (
+						<li class="tenet-card" id={`tenet-${t.num}`}>
+							<span class="tenet-card__grid-bg" aria-hidden="true"></span>
+							<span class="tenet-card__corner tenet-card__corner--tl" aria-hidden="true"></span>
+							<span class="tenet-card__corner tenet-card__corner--br" aria-hidden="true"></span>
+
+							<div class="tenet-card__layout">
+								<div class="tenet-card__aside">
+									<span class="tenet-card__num" aria-hidden="true">
+										{t.num}
+									</span>
+									<span class="tenet-card__line" aria-hidden="true"></span>
+								</div>
+
+								<div class="tenet-card__main">
+									<div class="tenet-card__header">
+										<p class="tenet-card__label">{t.label}</p>
+										<h3 class="tenet-card__title">{t.title}</h3>
+									</div>
+
+									<blockquote class="tenet-card__quote">
+										<p>{t.quote}</p>
+									</blockquote>
+
+									<div class="tenet-card__body">
+										{t.content.map((paragraph) => (
+											<p>{paragraph}</p>
+										))}
+									</div>
+								</div>
+							</div>
+						</li>
+					))
+				}
+			</ol>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.doctrine-panel__corner {
+		position: absolute;
+		width: 1.25rem;
+		height: 1.25rem;
+		border-color: var(--color-accent-soft);
+		border-style: solid;
+		pointer-events: none;
+	}
+
+	.doctrine-panel__corner--tl {
+		top: 0.85rem;
+		left: 0.85rem;
+		border-width: 2px 0 0 2px;
+	}
+
+	.doctrine-panel__corner--br {
+		right: 0.85rem;
+		bottom: 0.85rem;
+		border-width: 0 2px 2px 0;
+	}
+
+	/* ── Tenets section ── */
+	.doctrine-tenets {
+		background: var(--color-mist);
+	}
+
+	.doctrine-tenets__head {
+		text-align: center;
+		max-width: 36rem;
+		margin-inline: auto;
+		margin-bottom: 2.75rem;
+	}
+
+	.doctrine-tenets__title {
+		margin: 0 0 1rem;
+		font-size: clamp(1.65rem, 3vw, 2rem);
+		color: var(--color-forest);
+	}
+
+	.doctrine-tenets .section__lead {
+		margin: 0;
+	}
+
+	.doctrine-creed-card {
+		margin-bottom: 1.5rem;
+	}
+
+	.doctrine-creed-card__inner {
+		position: relative;
+		z-index: 1;
+		padding: clamp(1.75rem, 3vw, 2.5rem);
+	}
+
+	.doctrine-creed-card__label {
+		margin: 0 0 0.8rem;
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		font-weight: 500;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+		color: var(--color-accent);
+	}
+
+	.doctrine-creed-card__lead {
+		margin: 0 0 1.2rem;
+		line-height: 1.9;
+		color: var(--color-text-muted);
+	}
+
+	.doctrine-creed-card__quote {
+		margin: 0;
+		padding: 0;
+		border: none;
+		background: transparent;
+	}
+
+	.doctrine-creed-card__quote p {
+		margin: 0;
+		font-family: var(--font-display);
+		font-size: clamp(1.35rem, 3vw, 1.95rem);
+		font-weight: 700;
+		letter-spacing: 0.03em;
+		line-height: 1.55;
+		color: var(--color-forest);
+	}
+
+	.doctrine-creed-card__note {
+		margin: 1rem 0 0;
+		padding-top: 1rem;
+		border-top: 1px solid var(--color-line);
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		letter-spacing: 0.08em;
+		color: var(--color-text-muted);
+	}
+
+	.doctrine-index {
+		display: grid;
+		grid-template-columns: repeat(5, 1fr);
+		gap: 0.85rem;
+		margin-bottom: 3rem;
+	}
+
+	.doctrine-index__item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.45rem;
+		padding: 1.1rem 0.75rem;
+		text-decoration: none;
+		text-align: center;
+		background: var(--color-panel);
+		border: 1px solid var(--color-line);
+		border-radius: var(--radius-sm);
+		transition:
+			background 0.25s var(--ease-out),
+			border-color 0.25s var(--ease-out),
+			transform 0.25s var(--ease-out);
+	}
+
+	.doctrine-index__item:hover {
+		background: var(--color-soft);
+		border-color: rgba(3, 137, 50, 0.35);
+		transform: translateY(-2px);
+	}
+
+	.doctrine-index__num {
+		font-family: var(--font-display);
+		font-size: 1.35rem;
+		font-weight: 700;
+		color: var(--color-accent);
+		letter-spacing: 0.05em;
+		line-height: 1;
+	}
+
+	.doctrine-index__title {
+		font-size: 0.88rem;
+		font-weight: 500;
+		color: var(--color-forest);
+		letter-spacing: 0.04em;
+	}
+
+	.tenets {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		gap: 2rem;
+	}
+
+	.tenet-card {
+		position: relative;
+		padding: 0;
+		border: 1px solid var(--color-line);
+		border-radius: var(--radius);
+		background: var(--color-panel);
+		box-shadow: var(--shadow-soft);
+		overflow: hidden;
+		scroll-margin-top: calc(var(--nav-height) + 1.5rem);
+	}
+
+	.tenet-card__grid-bg {
+		position: absolute;
+		inset: 0;
+		background-image:
+			url("data:image/svg+xml,%3Csvg width='56' height='56' viewBox='0 0 56 56' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M28 0v56M0 28h56' stroke='%23038932' stroke-opacity='0.06' stroke-width='1'/%3E%3C/svg%3E");
+		pointer-events: none;
+	}
+
+	.tenet-card__corner {
+		position: absolute;
+		width: 1.1rem;
+		height: 1.1rem;
+		border-color: var(--color-accent);
+		border-style: solid;
+		opacity: 0.55;
+		pointer-events: none;
+		z-index: 1;
+	}
+
+	.tenet-card__corner--tl {
+		top: 1rem;
+		left: 1rem;
+		border-width: 2px 0 0 2px;
+	}
+
+	.tenet-card__corner--br {
+		right: 1rem;
+		bottom: 1rem;
+		border-width: 0 2px 2px 0;
+	}
+
+	.tenet-card__layout {
+		position: relative;
+		z-index: 1;
+		display: grid;
+		grid-template-columns: 5.5rem 1fr;
+		gap: 0 2.5rem;
+		padding: 2.5rem 2.75rem;
+	}
+
+	.tenet-card__aside {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding-top: 0.25rem;
+	}
+
+	.tenet-card__num {
+		font-family: var(--font-display);
+		font-size: 2.75rem;
+		font-weight: 700;
+		color: var(--color-accent);
+		letter-spacing: 0.04em;
+		line-height: 1;
+	}
+
+	.tenet-card__line {
+		flex: 1;
+		width: 2px;
+		min-height: 2rem;
+		margin-top: 1.25rem;
+		background: rgba(3, 137, 50, 0.28);
+	}
+
+	.tenet-card__label {
+		margin: 0 0 0.35rem;
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		font-weight: 500;
+		letter-spacing: 0.12em;
+		color: var(--color-accent);
+	}
+
+	.tenet-card__title {
+		margin: 0 0 1.35rem;
+		font-size: clamp(1.3rem, 2vw, 1.55rem);
+		color: var(--color-forest);
+	}
+
+	.tenet-card__quote {
+		margin: 0 0 1.75rem;
+		padding: 1.35rem 1.5rem;
+		border-radius: var(--radius-sm);
+		border: 1px solid rgba(3, 137, 50, 0.22);
+		border-left: 3px solid var(--color-accent);
+		background: var(--color-soft);
+	}
+
+	.tenet-card__quote p {
+		margin: 0;
+		font-family: var(--font-display);
+		font-size: 1.08rem;
+		font-weight: 500;
+		line-height: 1.8;
+		letter-spacing: 0.02em;
+		color: var(--color-forest);
+	}
+
+	.tenet-card__body {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 0.85rem;
+	}
+
+	.tenet-card__body p {
+		margin: 0;
+		color: var(--color-text-muted);
+		line-height: 1.95;
+		font-size: 0.98rem;
+	}
+
+	.doctrine-disclaimer {
+		margin: 0 !important;
+		padding-top: 1.5rem;
+		border-top: 1px solid rgba(3, 137, 50, 0.25);
+		font-size: 0.88rem;
+		color: rgba(243, 248, 244, 0.4) !important;
+	}
+
+	@media (max-width: 900px) {
+		.doctrine-index {
+			grid-template-columns: repeat(3, 1fr);
+		}
+
+		.tenet-card__body {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.doctrine-index {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		.tenet-card__layout {
+			grid-template-columns: 1fr;
+			gap: 0;
+			padding: 1.75rem 1.5rem;
+		}
+
+		.tenet-card__aside {
+			flex-direction: row;
+			align-items: center;
+			gap: 1rem;
+			margin-bottom: 1.25rem;
+			padding-top: 0;
+		}
+
+		.tenet-card__num {
+			font-size: 2rem;
+		}
+
+		.tenet-card__line {
+			flex: 1;
+			width: auto;
+			height: 2px;
+			min-height: 0;
+			margin-top: 0;
+			background: rgba(3, 137, 50, 0.28);
+		}
+
+		.doctrine-closing__panel {
+			padding: 2.25rem 1.5rem;
+		}
+	}
+
+	@media (max-width: 400px) {
+		.doctrine-index {
+			grid-template-columns: 1fr 1fr;
+		}
+
+		.doctrine-index__item:last-child {
+			grid-column: 1 / -1;
+		}
+	}
+</style>

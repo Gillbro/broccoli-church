@@ -1,0 +1,58 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import EntryCard from '../../components/EntryCard.astro';
+import { newsItems } from '../../data/news';
+---
+
+<Layout title="お知らせ" description="ブロッコリー教会からのお知らせ一覧。">
+	<header class="page-hero">
+		<div class="container">
+			<p class="section__eyebrow">News</p>
+			<h1>お知らせ</h1>
+			<p>教会からの報告と更新情報です。</p>
+		</div>
+	</header>
+
+	<section class="section">
+		<div class="container">
+			<ul class="entry-grid">
+				{
+					newsItems.map((item) => (
+						<EntryCard
+							href={`/news/${item.slug}/`}
+							title={item.title}
+							excerpt={item.body}
+							image={item.image}
+							imageAlt={item.imageAlt}
+							meta={item.label}
+							datetime={item.date}
+						/>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.entry-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.5rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	@media (max-width: 900px) {
+		.entry-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (max-width: 560px) {
+		.entry-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

@@ -1,0 +1,144 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { withBase } from '../../lib/paths';
+import { eventItems, getEventBySlug } from '../../data/events';
+
+export function getStaticPaths() {
+	return eventItems.map((item) => ({
+		params: { slug: item.slug },
+	}));
+}
+
+const { slug } = Astro.params;
+const item = getEventBySlug(slug!);
+if (!item) {
+	throw new Error(`Event not found: ${slug}`);
+}
+---
+
+<Layout title={item.title} description={item.body} imageAlt={item.imageAlt} type="article">
+	<article class="entry-detail">
+		<header class="page-hero">
+			<div class="container">
+				<p class="section__eyebrow">Events</p>
+				<p class="entry-detail__meta">
+					<span>{item.label}</span>
+					<span>{item.time}</span>
+					<span>{item.place}</span>
+				</p>
+				<h1>{item.title}</h1>
+			</div>
+		</header>
+
+		<section class="section">
+			<div class="container entry-detail__inner">
+				<figure class="entry-detail__media">
+					<img src={withBase(item.image)} alt={item.imageAlt} width="960" height="600" decoding="async" />
+				</figure>
+				<div class="entry-detail__body">
+					<p class="entry-detail__lead">{item.body}</p>
+					{
+						item.content.map((paragraph) => (
+							<p>{paragraph}</p>
+						))
+					}
+					{
+						item.sections?.map((section) => (
+							<section class="entry-detail__section">
+								<h2>{section.heading}</h2>
+								{section.paragraphs.map((paragraph) => (
+									<p>{paragraph}</p>
+								))}
+							</section>
+						))
+					}
+				</div>
+				<p class="entry-detail__back">
+					<a href={withBase('/events')}>← イベント一覧へ</a>
+				</p>
+			</div>
+		</section>
+	</article>
+</Layout>
+
+<style>
+	.entry-detail__meta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.35rem 1.25rem;
+		margin: 0 0 0.75rem;
+		font-size: 0.9rem;
+		letter-spacing: 0.04em;
+		color: var(--color-leaf);
+	}
+
+	.entry-detail__inner {
+		max-width: 42rem;
+	}
+
+	.entry-detail__media {
+		margin: 0 0 2.25rem;
+		overflow: hidden;
+		border-radius: var(--radius);
+		border: 1px solid var(--color-line);
+		background: var(--color-void);
+	}
+
+	.entry-detail__media img {
+		width: 100%;
+		height: auto;
+		display: block;
+	}
+
+	.entry-detail__body {
+		display: grid;
+		gap: 1.25rem;
+	}
+
+	.entry-detail__body > p {
+		margin: 0;
+		font-size: 1.05rem;
+		line-height: 1.95;
+		color: var(--color-text-muted);
+	}
+
+	.entry-detail__lead {
+		padding-bottom: 1.25rem;
+		border-bottom: 1px solid var(--color-line);
+		font-size: 1.12rem !important;
+		font-weight: 500;
+		color: var(--color-forest) !important;
+	}
+
+	.entry-detail__section {
+		display: grid;
+		gap: 0.85rem;
+		padding-top: 0.75rem;
+		border-top: 1px solid var(--color-line);
+	}
+
+	.entry-detail__section h2 {
+		margin: 0;
+		font-size: 1.15rem;
+		font-weight: 700;
+		color: var(--color-forest);
+	}
+
+	.entry-detail__section p {
+		margin: 0;
+		font-size: 1.02rem;
+		line-height: 1.9;
+		color: var(--color-text-muted);
+	}
+
+	.entry-detail__back {
+		margin: 2.75rem 0 0;
+		padding-top: 1.5rem;
+		border-top: 1px solid var(--color-line);
+	}
+
+	.entry-detail__back a {
+		text-decoration: none;
+		font-weight: 500;
+	}
+</style>

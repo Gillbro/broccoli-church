@@ -1,23 +1,88 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Splash from '../components/Splash.astro';
+import { absoluteUrl, withBase } from '../lib/paths';
+import '../styles/global.css';
+
+interface Props {
+	title?: string;
+	description?: string;
+	/** OGP 用画像（/images/... または絶対 URL） */
+	image?: string;
+	imageAlt?: string;
+	type?: 'website' | 'article';
+}
+
+const {
+	title = 'ブロッコリー教会',
+	description = 'VRChat上でブロッコリーの魅力を広める、ブロッコリー教会の公式サイト。「ブロッコリーは世界一おいしい」をテーマに活動を展開している。',
+	image,
+	imageAlt = 'ブロッコリー教会',
+	type = 'website',
+} = Astro.props;
+
+const pageTitle = title === 'ブロッコリー教会' ? title : `${title} | ブロッコリー教会`;
+const site = Astro.site ?? Astro.url;
+const canonicalURL = new URL(Astro.url.pathname, site);
+const defaultOgImage = '/images/icon_burokyo.png';
+const ogImagePath = image && !image.endsWith('.svg') ? image : defaultOgImage;
+const ogImageURL = absoluteUrl(ogImagePath, site);
+---
+
 <!doctype html>
-<html lang="en">
+<html lang="ja">
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
+		<link rel="preload" href={withBase('/images/icon_burokyo.png')} as="image" />
+		<meta name="description" content={description} />
+		<title>{pageTitle}</title>
+		<link rel="canonical" href={canonicalURL.href} />
+
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonicalURL.href} />
+		<meta property="og:site_name" content="ブロッコリー教会" />
+		<meta property="og:locale" content="ja_JP" />
+		<meta property="og:type" content={type} />
+		<meta property="og:image" content={ogImageURL} />
+		<meta property="og:image:alt" content={imageAlt} />
+
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={pageTitle} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImageURL} />
+		<meta name="twitter:image:alt" content={imageAlt} />
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=DotGothic16&family=IBM+Plex+Mono:wght@500&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap"
+			rel="stylesheet"
+		/>
+		<style is:inline>
+			#site-splash {
+				position: fixed;
+				inset: 0;
+				z-index: 10000;
+				display: grid;
+				place-items: center;
+				background: #04150c;
+			}
+			#site-splash.is-skip,
+			#site-splash.is-done {
+				display: none !important;
+			}
+		</style>
 	</head>
 	<body>
-		<slot />
+		<Splash />
+		<Header />
+		<main id="main">
+			<slot />
+		</main>
+		<Footer />
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>

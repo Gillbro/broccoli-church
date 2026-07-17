@@ -1,0 +1,401 @@
+---
+import { withBase } from '../lib/paths';
+---
+
+<section class="home-hero" aria-labelledby="home-brand">
+	<div class="home-hero__backdrop" aria-hidden="true">
+		<div class="home-hero__grid"></div>
+		<div class="home-hero__orb home-hero__orb--a"></div>
+		<div class="home-hero__orb home-hero__orb--b"></div>
+		<div class="home-hero__emblem">
+			<svg class="home-hero__rings" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<circle cx="210" cy="210" r="198" stroke="rgba(3,137,50,0.4)" stroke-width="1" stroke-dasharray="3 12"
+				></circle>
+				<circle cx="210" cy="210" r="158" stroke="rgba(184,235,200,0.25)" stroke-width="1"></circle>
+				<circle cx="210" cy="210" r="118" stroke="rgba(3,137,50,0.5)" stroke-width="1.5"></circle>
+				<circle cx="210" cy="52" r="3.5" fill="#b8ebc8"></circle>
+				<circle cx="348" cy="210" r="3.5" fill="#b8ebc8"></circle>
+				<circle cx="72" cy="210" r="3.5" fill="#038932"></circle>
+			</svg>
+			<svg class="home-hero__core" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+			</svg>
+		</div>
+
+		<div class="home-hero__buros" aria-hidden="true">
+			<div class="home-hero__buro-float home-hero__buro-float--1">
+				<img
+					class="home-hero__buro home-hero__buro--1"
+					src={withBase('/images/buro1.png')}
+					alt=""
+					width="200"
+					height="200"
+					loading="lazy"
+					decoding="async"
+				/>
+			</div>
+			<div class="home-hero__buro-float home-hero__buro-float--2">
+				<img
+					class="home-hero__buro home-hero__buro--2"
+					src={withBase('/images/buro2.png')}
+					alt=""
+					width="200"
+					height="200"
+					loading="lazy"
+					decoding="async"
+				/>
+			</div>
+			<div class="home-hero__buro-float home-hero__buro-float--3-hero">
+				<img
+					class="home-hero__buro home-hero__buro--3"
+					src={withBase('/images/buro3.png')}
+					alt=""
+					width="200"
+					height="200"
+					loading="lazy"
+					decoding="async"
+				/>
+			</div>
+		</div>
+	</div>
+
+	<div class="home-hero__content">
+		<h1 class="home-hero__logo reveal-fade" id="home-brand">
+			<img
+				class="home-hero__logo-image"
+				src={withBase('/images/icon_burokyo.png')}
+				alt="ブロッコリー教会 — ブロッコリーは世界一おいしい"
+				width="720"
+				height="405"
+				decoding="async"
+				fetchpriority="high"
+			/>
+		</h1>
+		<p class="home-hero__lead reveal-fade">
+			<span class="home-hero__lead-word">OFFICIAL</span>
+			<span class="home-hero__lead-word">WEBSITE</span>
+		</p>
+	</div>
+</section>
+
+<style>
+	.home-hero {
+		position: relative;
+		min-height: 100svh;
+		display: grid;
+		align-items: end;
+		overflow: hidden;
+		color: var(--color-text-on-dark);
+		background: var(--color-void);
+	}
+
+	.home-hero__backdrop {
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+	}
+
+	.home-hero__grid {
+		position: absolute;
+		inset: 0;
+		opacity: 0.55;
+		background-image: url("data:image/svg+xml,%3Csvg width='64' height='64' viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M64 0H0v64' fill='none' stroke='%23038932' stroke-opacity='0.35' stroke-width='1'/%3E%3C/svg%3E");
+	}
+
+	.home-hero__orb {
+		position: absolute;
+		border-radius: 50%;
+		border: 1px solid rgba(3, 137, 50, 0.35);
+	}
+
+	.home-hero__orb--a {
+		width: min(58vw, 28rem);
+		height: min(58vw, 28rem);
+		top: 12%;
+		right: 8%;
+		background: rgba(3, 137, 50, 0.14);
+		animation: orb-pulse 9s ease-in-out infinite;
+	}
+
+	.home-hero__orb--b {
+		width: min(34vw, 16rem);
+		height: min(34vw, 16rem);
+		bottom: 18%;
+		right: 28%;
+		background: rgba(184, 235, 200, 0.07);
+		animation: orb-pulse 11s ease-in-out 1s infinite;
+	}
+
+	.home-hero__emblem {
+		position: absolute;
+		right: max(4%, calc(50% - 26rem));
+		top: 50%;
+		width: min(46vw, 26rem);
+		aspect-ratio: 1;
+		transform: translateY(-50%);
+		filter: drop-shadow(0 0 32px rgba(3, 137, 50, 0.4));
+		animation: emblem-in 1.1s var(--ease-out) both;
+	}
+
+	.home-hero__buros {
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+	}
+
+	.home-hero__buro-float {
+		position: absolute;
+		animation: buro-float 4.5s ease-in-out infinite;
+	}
+
+	.home-hero__buro-float--1 {
+		top: 23%;
+		right: 40%;
+		animation-delay: 0s;
+	}
+
+	.home-hero__buro-float--2 {
+		top: 56%;
+		right: 28%;
+		animation-delay: 0.8s;
+	}
+
+	.home-hero__buro-float--3-hero {
+		top: 33%;
+		right: 12%;
+		animation-delay: 1.2s;
+	}
+
+	.home-hero__buro {
+		display: block;
+		width: min(30vw, 15rem);
+		max-width: none;
+		height: auto;
+		filter: drop-shadow(0 8px 20px rgba(4, 21, 12, 0.35));
+		animation: buro-in 1.1s var(--ease-out) both;
+	}
+
+	.home-hero__buro--1 {
+		animation-delay: 0.24s;
+	}
+
+	.home-hero__buro--2 {
+		animation-delay: 0.48s;
+	}
+
+	.home-hero__buro--3 {
+		animation-delay: 0.72s;
+	}
+
+	.home-hero__rings,
+	.home-hero__core {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	.home-hero__rings {
+		animation: ring-spin 42s linear infinite;
+	}
+
+	.home-hero__core {
+		animation: core-float 7s ease-in-out infinite;
+	}
+
+	.home-hero__content {
+		position: relative;
+		z-index: 1;
+		width: min(100% - 2.5rem, 30rem);
+		margin-left: max(1.25rem, calc((100% - var(--max-width)) / 2 + 1.25rem));
+		padding: calc(var(--nav-height) + 4rem) 0 5rem;
+		text-align: center;
+	}
+
+	.home-hero__logo {
+		margin: 0;
+		line-height: 0;
+	}
+
+	.home-hero__logo-image {
+		display: block;
+		width: 100%;
+		max-width: 25rem;
+		height: auto;
+		aspect-ratio: 720 / 405;
+		margin-inline: auto;
+		margin-bottom: -1.75rem;
+		opacity: 0.88;
+		mix-blend-mode: screen;
+		transform: translateZ(0);
+	}
+
+	.home-hero__lead {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 0.5em;
+		margin: 0 auto 2rem;
+		max-width: none;
+		font-family: var(--font-body);
+		font-size: 1.3rem;
+		font-weight: 700;
+		line-height: 1.5;
+		letter-spacing: 0.15em;
+		text-align: center;
+		color: rgba(243, 248, 244, 0.72);
+	}
+
+	.home-hero__lead-word {
+		padding-inline-end: 0.28em;
+	}
+
+	.home-hero__actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.9rem;
+	}
+
+	@keyframes orb-pulse {
+		0%,
+		100% {
+			transform: scale(1);
+			opacity: 0.9;
+		}
+		50% {
+			transform: scale(1.04);
+			opacity: 1;
+		}
+	}
+
+	@keyframes emblem-in {
+		from {
+			opacity: 0;
+			transform: translateY(-46%) scale(0.94);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(-50%) scale(1);
+		}
+	}
+
+	@keyframes buro-in {
+		from {
+			opacity: 0;
+			transform: translateY(0.75rem) scale(0.92);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0) scale(1);
+		}
+	}
+
+	@keyframes buro-float {
+		0%,
+		100% {
+			transform: translateY(0);
+		}
+		50% {
+			transform: translateY(-12px);
+		}
+	}
+
+	@keyframes ring-spin {
+		to {
+			transform: rotate(360deg);
+		}
+	}
+
+	@keyframes core-float {
+		0%,
+		100% {
+			transform: translateY(0);
+		}
+		50% {
+			transform: translateY(-8px);
+		}
+	}
+
+	@media (max-width: 820px) {
+		.home-hero__emblem {
+			right: 50%;
+			top: calc(var(--nav-height) + 7.5rem);
+			width: min(62vw, 16rem);
+			transform: translate(50%, 0);
+			opacity: 0.6;
+			animation: emblem-in-mobile 1.1s var(--ease-out) both;
+		}
+
+		/* ロゴと同じ中央カラムに合わせて配置（画面幅が変わっても真上付近を維持） */
+		.home-hero__buros {
+			inset: auto;
+			top: calc(var(--nav-height) + 3.25rem);
+			left: 50%;
+			transform: translateX(-50%);
+			width: min(100% - 2.5rem, 25rem);
+			height: 12rem;
+		}
+
+		.home-hero__buro-float--1,
+		.home-hero__buro-float--3-hero {
+			width: 13rem;
+		}
+
+		.home-hero__buro {
+			width: 100%;
+			max-width: none;
+		}
+
+		.home-hero__buro-float--1 {
+			top: 0;
+			left: 0.5rem;
+			right: auto;
+		}
+
+		.home-hero__buro-float--2 {
+			display: none;
+		}
+
+		.home-hero__buro-float--3-hero {
+			top: 1.5rem;
+			left: auto;
+			right: 0;
+			animation-delay: 0.6s;
+		}
+
+		.home-hero__orb--b {
+			display: none;
+		}
+
+		.home-hero__content {
+			margin-inline: auto;
+			width: min(100% - 2.5rem, var(--max-width));
+			padding-top: calc(var(--nav-height) + 15rem);
+		}
+	}
+
+	@keyframes emblem-in-mobile {
+		from {
+			opacity: 0;
+			transform: translate(50%, 1rem);
+		}
+		to {
+			opacity: 0.6;
+			transform: translate(50%, 0);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.home-hero__orb,
+		.home-hero__emblem,
+		.home-hero__buro,
+		.home-hero__buro-float,
+		.home-hero__rings,
+		.home-hero__core {
+			animation: none;
+		}
+
+		.home-hero__emblem {
+			transform: translateY(-50%);
+		}
+	}
+</style>
