@@ -25,7 +25,7 @@ const {
 const pageTitle = title === 'ブロッコリー教会' ? title : `${title} | ブロッコリー教会`;
 const site = Astro.site ?? Astro.url;
 const canonicalURL = new URL(Astro.url.pathname, site);
-const defaultOgImage = '/images/icon_burokyo.png';
+const defaultOgImage = '/images/OG.png';
 const ogImagePath = image && !image.endsWith('.svg') ? image : defaultOgImage;
 const ogImageURL = absoluteUrl(ogImagePath, site);
 ---
