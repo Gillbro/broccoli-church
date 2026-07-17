@@ -1,0 +1,6 @@
+# GitHub Pages / site metadata
+url: "https://gillbro.github.io"
+baseurl: "/broccoli-church"
+
+plugins:
+  - jekyll-sitemap

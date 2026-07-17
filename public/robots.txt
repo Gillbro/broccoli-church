@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gillbro.github.io/broccoli-church/sitemap-index.xml
